@@ -41,6 +41,12 @@ at supporting students and teachers in many aspects of music
 education, such as ear training, first-sight reading, solfa, scales,
 rhythm, harmony, and improvisation.
 
+%description -l pl.UTF-8
+Minuet jest wolnym i otwartoźródłowym oprogramowaniem do edukacji
+muzycznej. Wspiera uczniów i nauczycieli w wielu aspektach nauki
+muzyki, takich jak trening słuchu, czytania nut, solfeżu,
+rytmu, harmonii i improwizacji.
+
 %package devel
 Summary:	Header files for %{kaname} development
 Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{kaname}
