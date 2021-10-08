@@ -1,15 +1,15 @@
-%define		kdeappsver	21.08.1
+%define		kdeappsver	21.08.2
 %define		kframever	5.56.0
 %define		qtver		5.9.0
 %define		kaname		minuet
 Summary:	minuet
 Name:		ka5-%{kaname}
-Version:	21.08.1
+Version:	21.08.2
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	ab5020584b340e0926554367358cd7d6
+# Source0-md5:	4d037e3b88427e143c9c07a9f0cd8f68
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Gui-devel
@@ -33,6 +33,7 @@ BuildRequires:	shared-mime-info
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRequires:	zlib-devel
+Requires:	%{name}-data = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -46,6 +47,18 @@ Minuet jest wolnym i otwartoźródłowym oprogramowaniem do edukacji
 muzycznej. Wspiera uczniów i nauczycieli w wielu aspektach nauki
 muzyki, takich jak trening słuchu, czytania nut, solfeżu,
 rytmu, harmonii i improwizacji.
+
+%package data
+Summary:	Data files for %{kaname}
+Summary(pl.UTF-8):	Dane dla %{kaname}
+Group:		X11/Applications/Games
+BuildArch:	noarch
+
+%description data
+Data files for %{kaname}.
+
+%description data -l pl.UTF-8
+Dane dla %{kaname}.
 
 %package devel
 Summary:	Header files for %{kaname} development
@@ -84,12 +97,15 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
-%files -f %{kaname}.lang
+%files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/minuet
 %attr(755,root,root) %{_libdir}/libminuetinterfaces.so.0.3.0
 %dir %{_libdir}/qt5/plugins/minuet
 %attr(755,root,root) %{_libdir}/qt5/plugins/minuet/minuetfluidsynthsoundcontroller.so
+
+%files data -f %{kaname}.lang
+%defattr(644,root,root,755)
 %{_desktopdir}/org.kde.minuet.desktop
 %{_iconsdir}/hicolor/128x128/apps/minuet.png
 %{_iconsdir}/hicolor/128x128/apps/minuet.svg
