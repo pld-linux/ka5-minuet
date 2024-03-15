@@ -1,35 +1,36 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	24.01.95
+%define		kdeappsver	23.08.4
 %define		kframever	5.94.0
 %define		qtver		5.15.2
 %define		kaname		minuet
 Summary:	minuet
 Name:		ka5-%{kaname}
-Version:	24.01.95
-Release:	0.1
+Version:	23.08.4
+Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
-Source0:	https://download.kde.org/unstable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	182c3524c0caafe17103d38616509b75
+Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
+# Source0-md5:	bbb0051390f071b111be8ee08cd38f1c
 URL:		http://www.kde.org/
-BuildRequires:	Qt6Core-devel >= %{qtver}
-BuildRequires:	Qt6Gui-devel
-BuildRequires:	Qt6Network-devel >= 5.11.1
-BuildRequires:	Qt6Qml-devel
-BuildRequires:	Qt6Quick-devel
-BuildRequires:	Qt6Svg-devel
-BuildRequires:	Qt6Widgets-devel >= 5.11.1
+BuildRequires:	Qt5Core-devel >= %{qtver}
+BuildRequires:	Qt5Gui-devel
+BuildRequires:	Qt5Network-devel >= 5.11.1
+BuildRequires:	Qt5Qml-devel
+BuildRequires:	Qt5Quick-controls2-devel
+BuildRequires:	Qt5Quick-devel
+BuildRequires:	Qt5Svg-devel
+BuildRequires:	Qt5Widgets-devel >= 5.11.1
 BuildRequires:	fluidsynth-devel >= 1.1.6
 BuildRequires:	gettext-devel
-BuildRequires:	kf6-extra-cmake-modules >= %{kframever}
-BuildRequires:	kf6-kcoreaddons-devel >= %{kframever}
-BuildRequires:	kf6-kcrash-devel >= %{kframever}
-BuildRequires:	kf6-kdoctools-devel >= %{kframever}
-BuildRequires:	kf6-ki18n-devel >= %{kframever}
+BuildRequires:	kf5-extra-cmake-modules >= %{kframever}
+BuildRequires:	kf5-kcoreaddons-devel >= %{kframever}
+BuildRequires:	kf5-kcrash-devel >= %{kframever}
+BuildRequires:	kf5-kdoctools-devel >= %{kframever}
+BuildRequires:	kf5-ki18n-devel >= %{kframever}
 BuildRequires:	ninja
-BuildRequires:	qt6-build >= %{qtver}
+BuildRequires:	qt5-build >= %{qtver}
 BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	shared-mime-info
 BuildRequires:	tar >= 1:1.22
@@ -47,8 +48,8 @@ rhythm, harmony, and improvisation.
 %description -l pl.UTF-8
 Minuet jest wolnym i otwartoźródłowym oprogramowaniem do edukacji
 muzycznej. Wspiera uczniów i nauczycieli w wielu aspektach nauki
-muzyki, takich jak trening słuchu, czytania nut, solfeżu, rytmu,
-harmonii i improwizacji.
+muzyki, takich jak trening słuchu, czytania nut, solfeżu,
+rytmu, harmonii i improwizacji.
 
 %package data
 Summary:	Data files for %{kaname}
@@ -83,8 +84,7 @@ Pliki nagłówkowe dla programistów używających %{kaname}.
 	-G Ninja \
 	%{!?with_tests:-DBUILD_TESTING=OFF} \
 	-DHTML_INSTALL_DIR=%{_kdedocdir} \
-	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
-	-DQT_MAJOR_VERSION=6
+	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON
 %ninja_build -C build
 
 %if %{with tests}
@@ -107,18 +107,36 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/minuet
-%attr(755,root,root) %{_libdir}/libminuetinterfaces.so.*.*
-%dir %{_libdir}/qt6/plugins/minuet
-%attr(755,root,root) %{_libdir}/qt6/plugins/minuet/minuetfluidsynthsoundcontroller.so
+%attr(755,root,root) %{_libdir}/libminuetinterfaces.so.0.3.0
+%dir %{_libdir}/qt5/plugins/minuet
+%attr(755,root,root) %{_libdir}/qt5/plugins/minuet/minuetfluidsynthsoundcontroller.so
 
 %files data -f %{kaname}.lang
 %defattr(644,root,root,755)
 %{_desktopdir}/org.kde.minuet.desktop
-%{_iconsdir}/hicolor/*x*/apps/minuet*
-%{_iconsdir}/hicolor/*x*/actions/minuet*
+%{_iconsdir}/hicolor/128x128/apps/minuet.png
+%{_iconsdir}/hicolor/128x128/apps/minuet.svg
+%{_iconsdir}/hicolor/16x16/actions/minuet-chords.svg
+%{_iconsdir}/hicolor/16x16/actions/minuet-intervals.svg
+%{_iconsdir}/hicolor/16x16/actions/minuet-rhythms.svg
+%{_iconsdir}/hicolor/16x16/actions/minuet-scales.svg
+%{_iconsdir}/hicolor/16x16/apps/minuet.png
+%{_iconsdir}/hicolor/16x16/apps/minuet.svg
+%{_iconsdir}/hicolor/22x22/actions/minuet-chords.svg
+%{_iconsdir}/hicolor/22x22/actions/minuet-intervals.svg
+%{_iconsdir}/hicolor/22x22/actions/minuet-rhythms.svg
+%{_iconsdir}/hicolor/22x22/actions/minuet-scales.svg
+%{_iconsdir}/hicolor/22x22/apps/minuet.png
+%{_iconsdir}/hicolor/22x22/apps/minuet.svg
+%{_iconsdir}/hicolor/32x32/apps/minuet.png
+%{_iconsdir}/hicolor/32x32/apps/minuet.svg
+%{_iconsdir}/hicolor/48x48/apps/minuet.png
+%{_iconsdir}/hicolor/48x48/apps/minuet.svg
+%{_iconsdir}/hicolor/64x64/apps/minuet.png
+%{_iconsdir}/hicolor/64x64/apps/minuet.svg
 %{_iconsdir}/hicolor/scalable/apps/minuet.svgz
+%{_datadir}/metainfo/org.kde.minuet.appdata.xml
 %{_datadir}/minuet
-%{_datadir}/metainfo/org.kde.minuet.metainfo.xml
 
 %files devel
 %defattr(644,root,root,755)
